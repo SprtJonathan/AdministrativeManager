@@ -1,0 +1,12 @@
+[
+  {
+    "name": "test",
+    "type": "text",
+    "required": true
+  },
+  {
+    "name": "test2",
+    "type": "checkbox",
+    "required": false
+  }
+]

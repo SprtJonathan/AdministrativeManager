@@ -1,0 +1,74 @@
+.page-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.title-image {
+  animation: rotation360Back 0.6s linear;
+  -webkit-animation: rotation360Back 0.6s linear;
+  transition: all 0.2s ease-in-out;
+}
+
+.rotating {
+  animation: rotation360 2s linear infinite;
+  -webkit-animation: rotation360 2s infinite linear;
+  transition: all 0.2s ease-in-out;
+}
+
+.searchbar-table-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+  width: 95%;
+}
+
+.searchbar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+  max-width: 100%;
+}
+
+.searchbar-label {
+  margin-left: 1rem;
+}
+
+.searchbar {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.table-container {
+  overflow: scroll;
+  width: 100%;
+}
+
+.table-column{
+  cursor: pointer;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+tr {
+  background: rgba(255, 255, 255, 0.2);
+}

@@ -1,0 +1,33 @@
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Données</title>
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="./public/css/main.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <a class="active navbar-link" href="./index.html">Tableau</a>
+        <a class="navbar-link" href="./add.html">Ajout</a>
+      </nav>
+    </header>
+    <main class="page-content">
+      <div class="searchbar-table-container">
+        <div class="searchbar-container">
+          <label for="searchbar" class="searchbar-label">Rechercher</label>
+          <input
+            id="searchbar"
+            class="searchbar"
+            name="searchbar"
+            type="text"
+            onkeyup="searchEntries()"
+          />
+        </div>
+        <div id="table-container" class="table-container"></div>
+      </div>
+    </main>
+  </body>
+  <script src="./index.js"></script>
+</html>

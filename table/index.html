@@ -4,23 +4,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ajout des données</title>
     <meta name="description" content="" />
-    <link rel="stylesheet" href="./public/css/main.css" />
+    <link rel="stylesheet" href="../public/css/main.css" />
+    <script
+      src="https://kit.fontawesome.com/b4819ea1c6.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <header>
       <nav class="navbar">
-        <a class="navbar-link" href="./index.html">Tableau</a>
-        <a class="navbar-link active" href="./add.html">Ajout</a>
+        <div class="navbar-blank-space"></div>
+        <div class="horizontal-navbar">
+          <a class="navbar-horizontal-link" href="./index.html"
+            ><i class="fa-solid fa-house"></i> Page d'accueil</a
+          >
+          <a class="navbar-horizontal-link" href="./table/index.html"
+            ><i class="fa-regular fa-table-list"></i> Formulaire</a
+          >
+          <a class="navbar-horizontal-link" href="./table/index.html"
+            ><i class="fa-regular fa-table-list"></i> Sondage</a
+          >
+        </div>
+        <div class="vertical-navbar">
+          <div class="navbar-vertical-button">
+            <a class="navbar-vertical-link" href="./table/index.html"
+              ><i class="fa-solid fa-square-plus"></i> Ajout</a
+            >
+          </div>
+          <div class="navbar-vertical-button">
+            <a class="navbar-vertical-link" href="./table/table.html"
+              ><i class="fa-regular fa-table-list"></i> Tableau</a
+            >
+          </div>
+        </div>
       </nav>
     </header>
     <main class="page-content">
       <div class="new-input-form-block" id="newInputFormBlock">
         <h2>Ajouter un champ au formulaire</h2>
-        <form
-          id="newInputForm"
-          class="new-input-form"
-          onsubmit="addInputToForm(event)"
-        >
+        <form id="newInputForm" class="form" onsubmit="addInputToForm(event)">
           <div class="form-group">
             <label for="newInput" class="new-input-label" required
               >Nom du champ</label
@@ -56,7 +78,7 @@
       </div>
       <div id="mainFormBlock" class="main-form-block">
         <h2>Ajout d'une nouvelle entrée</h2>
-        <form id="mainForm" class="main-form" onsubmit="submitMainForm()">
+        <form id="mainForm" class="form" onsubmit="submitMainForm()">
           <div id="newObjectForm"></div>
           <button type="submit" id="mainFormButton" class="new-input-submit">
             Nouvelle entrée
@@ -65,5 +87,5 @@
       </div>
     </main>
   </body>
-  <script src="./add.js"></script>
+  <script src="./index.js"></script>
 </html>

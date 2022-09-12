@@ -1,11 +1,27 @@
 body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   font-family: Roboto, sans-serif;
   margin: 0;
   font-size: 12px;
-  background-image: linear-gradient(45deg, rgb(195, 0, 255), rgb(0, 195, 255));
+
+  background-image: linear-gradient(45deg, rgb(41, 41, 41), rgb(33, 33, 33));
 }
 
-main {
+main.page-content {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(45deg, rgb(195, 0, 255), rgb(0, 195, 255));
+  z-index: 0;
+  padding-left: 100px;
 }
 
 h1 {
@@ -75,47 +91,124 @@ select {
   transition: all 0.2s ease-in-out;
 }
 
-.navbar {
+header {
   width: 100%;
-  background-color: #555;
-  overflow: auto;
-  margin: 0 0 2rem 0;
-  /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.horizontal-navbar {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 35px;
+  z-index: 2;
+}
+
+.vertical-navbar {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100px;
+  height: 100%;
+  z-index: 1;
+  background: rgb(22, 22, 22);
 }
 
 .active {
   color: whitesmoke;
 }
 
-.navbar-link {
-  color: rgb(0, 41, 61);
+.navbar-blank-space {
+  position: absolute;
+  display: block;
+  width: 100px;
+  height: 35px;
+  background: rgb(22, 22, 22);
+}
+
+.navbar-horizontal-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(22, 22, 22);
+  color: white;
   float: left;
-  padding: 12px;
+  height: 100%;
   text-decoration: none;
   font-size: 17px;
-  width: 50%; /* Four links of equal widths */
+  width: 100%; /* Four links of equal widths */
   text-align: center;
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
   transition: all 0.2s ease-in-out;
 }
-.navbar a:hover {
-  color: white;
+
+.navbar-vertical-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: left;
+  height: 100px;
+  text-decoration: none;
+  font-size: 17px;
+  width: 100%; /* Four links of equal widths */
+  font-size: 14px;
+  font-weight: 600;
   transition: all 0.2s ease-in-out;
-  /* From https://css.glass */
-  background: rgba(0, 41, 61, 0.8);
+}
+.navbar-horizontal-link:nth-child(1) {
+  margin-left: 100px;
+}
+.navbar-vertical-button:nth-child(1) {
+  margin-top: 35px;
+  height: 100px;
+}
+.navbar-vertical-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(30, 30, 30);
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 40%;
+  width: 80px;
+  height: 80px;
 }
 
-@media (min-width: 768px) {
+.navbar a:hover {
+  transition: all 0.2s ease-in-out;
+  /* From https://css.glass */
+  color: whitesmoke;
+  background: rgb(40, 40, 40);
+}
+
+@media (min-width: 1440px) {
   body {
     font-size: 14px;
+  }
+  header {
+    width: 100px;
+  }
+  main.page-content {
+    width: 100%;
+    padding-left: 100px;
+    bottom: 0px;
+    right: 0px;
   }
   button {
     padding: 1rem;

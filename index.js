@@ -4,13 +4,15 @@ let objectsForTable = localStorageContent;
 
 function initVariables() {
   let keys = [];
-  if (localStorageContent != null || localStorageContent.length != 0) {
-    for (i = 0; i < localStorageContent.length; i++) {
-      for (j = 0; j < Object.keys(localStorageContent[i]).length; j++) {
-        console.log(Object.keys(localStorageContent[i])[j]);
-        // This verification prevent key duplications
-        if (!keys.some((e) => e === Object.keys(localStorageContent[i])[j])) {
-          keys.push(Object.keys(localStorageContent[i])[j]);
+  if (localStorageContent != null) {
+    if (localStorageContent.length != 0) {
+      for (i = 0; i < localStorageContent.length; i++) {
+        for (j = 0; j < Object.keys(localStorageContent[i]).length; j++) {
+          console.log(Object.keys(localStorageContent[i])[j]);
+          // This verification prevent key duplications
+          if (!keys.some((e) => e === Object.keys(localStorageContent[i])[j])) {
+            keys.push(Object.keys(localStorageContent[i])[j]);
+          }
         }
       }
     }

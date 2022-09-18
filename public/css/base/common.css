@@ -148,8 +148,9 @@ header {
 .navbar-table {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
+  height: 100%;
 }
 
 .navbar-table-link-block {
@@ -160,6 +161,7 @@ header {
   align-items: center;
   height: 60px;
   width: 60px;
+  margin: 8px 0;
 }
 
 .navbar-table-link {

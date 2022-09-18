@@ -1,0 +1,69 @@
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajout des données</title>
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="./public/css/main.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <a class="navbar-link" href="./index.html">Tableau</a>
+        <a class="navbar-link active" href="./add.html">Ajout</a>
+      </nav>
+    </header>
+    <main class="page-content">
+      <div class="new-input-form-block" id="newInputFormBlock">
+        <h2>Ajouter un champ au formulaire</h2>
+        <form
+          id="newInputForm"
+          class="new-input-form"
+          onsubmit="addInputToForm(event)"
+        >
+          <div class="form-group">
+            <label for="newInput" class="new-input-label" required
+              >Nom du champ</label
+            >
+            <input type="text" id="newInput" class="new-input" />
+          </div>
+
+          <div class="form-group">
+            <label for="newInputType" class="new-input-label"
+              >Type de champ</label
+            >
+            <select id="newInputType" class="new-input">
+              <option value="text">Texte</option>
+              <option value="number">Nombre</option>
+              <option value="date">Date</option>
+              <option value="month">Mois</option>
+              <option value="timte">Heure</option>
+              <option value="datetime-local">Jour et heure</option>
+              <option value="email">Email</option>
+              <option value="file">Fichier</option>
+              <option value="file">Fichier</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="isRequired">Doit être rempli</label>
+            <input type="checkbox" id="isRequired" />
+          </div>
+
+          <button type="submit" class="new-input-submit">Nouveau champ</button>
+          <div id="errorNewInput"></div>
+        </form>
+      </div>
+      <div id="mainFormBlock" class="main-form-block">
+        <h2>Ajout d'une nouvelle entrée</h2>
+        <form id="mainForm" class="main-form" onsubmit="submitMainForm()">
+          <div id="newObjectForm"></div>
+          <button type="submit" id="mainFormButton" class="new-input-submit">
+            Nouvelle entrée
+          </button>
+        </form>
+      </div>
+    </main>
+  </body>
+  <script src="./add.js"></script>
+</html>

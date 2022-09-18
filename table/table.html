@@ -4,37 +4,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Données</title>
     <meta name="description" content="" />
-    <link rel="stylesheet" href="./public/css/main.css" />
-    <script
-      src="https://kit.fontawesome.com/b4819ea1c6.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="../public/css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
   </head>
   <body>
     <header>
       <nav class="navbar">
-        <div class="navbar-blank-space"></div>
-        <div class="horizontal-navbar">
-          <a class="navbar-horizontal-link" href="./index.html"
-            ><i class="fa-solid fa-house"></i> Page d'accueil</a
-          >
-          <a class="navbar-horizontal-link" href="./table/index.html"
-            ><i class="fa-regular fa-table-list"></i> Formulaire</a
-          >
-          <a class="navbar-horizontal-link" href="./table/index.html"
-            ><i class="fa-regular fa-table-list"></i> Sondage</a
-          >
+        <div class="navbar-general">
+          <a class="navbar-general-link" href="../index.html" title="Accueil"
+            ><i class="fa fa-house"></i>
+          </a>
+          <a
+            class="navbar-general-link active"
+            href="./"
+            title="Gestionnaire de tableaux"
+            ><i class="fa fa-table"></i
+          ></a>
+          <a
+            class="navbar-general-link"
+            href="./"
+            title="Formulaires / Sondages"
+            ><i class="fa fa-list"></i
+          ></a>
         </div>
-        <div class="vertical-navbar">
-          <div class="navbar-vertical-button">
-            <a class="navbar-vertical-link" href="./table/index.html"
-              ><i class="fa-solid fa-square-plus"></i> Ajout</a
-            >
-          </div>
-          <div class="navbar-vertical-button">
-            <a class="navbar-vertical-link" href="./table/table.html"
-              ><i class="fa-regular fa-table-list"></i> Tableau</a
-            >
+        <hr class="navbar-general-spacer" />
+        <div class="navbar-general">
+          <div>
+            <a
+              class="navbar-general-link active"
+              href="../index.html"
+              title="Accueil"
+              ><i class="fa fa-square-plus"></i>
+            </a>
           </div>
         </div>
       </nav>

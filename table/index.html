@@ -5,86 +5,103 @@
     <title>Ajout des données</title>
     <meta name="description" content="" />
     <link rel="stylesheet" href="../public/css/main.css" />
-    <script
-      src="https://kit.fontawesome.com/b4819ea1c6.js"
-      crossorigin="anonymous"
-    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
   </head>
   <body>
     <header>
       <nav class="navbar">
-        <div class="navbar-blank-space"></div>
-        <div class="horizontal-navbar">
-          <a class="navbar-horizontal-link" href="./index.html"
-            ><i class="fa-solid fa-house"></i> Page d'accueil</a
-          >
-          <a class="navbar-horizontal-link" href="./table/index.html"
-            ><i class="fa-regular fa-table-list"></i> Formulaire</a
-          >
-          <a class="navbar-horizontal-link" href="./table/index.html"
-            ><i class="fa-regular fa-table-list"></i> Sondage</a
-          >
+        <div class="navbar-general">
+          <a class="navbar-general-link" href="../index.html" title="Accueil"
+            ><i class="fa fa-house"></i>
+          </a>
+          <a
+            class="navbar-general-link active"
+            href="./"
+            title="Gestionnaire de tableaux"
+            ><i class="fa fa-table"></i
+          ></a>
+          <a
+            class="navbar-general-link"
+            href="./"
+            title="Formulaires / Sondages"
+            ><i class="fa fa-list"></i
+          ></a>
         </div>
-        <div class="vertical-navbar">
-          <div class="navbar-vertical-button">
-            <a class="navbar-vertical-link" href="./table/index.html"
-              ><i class="fa-solid fa-square-plus"></i> Ajout</a
-            >
+        <hr class="navbar-general-spacer" />
+        <div class="navbar-table">
+          <div class="navbar-table-link-block">
+            <a
+              class="navbar-table-link active"
+              href="../index.html"
+              title="Ajouter un tableau"
+              ><i class="fa fa-square-plus"></i>
+            </a>
           </div>
-          <div class="navbar-vertical-button">
-            <a class="navbar-vertical-link" href="./table/table.html"
-              ><i class="fa-regular fa-table-list"></i> Tableau</a
-            >
+          <div class="navbar-table-link-block">
+            <a class="navbar-table-link active" href="" title=""
+              ><i class="fa fa-table"></i>
+              <h5 class="navbar-table-title">Mon tableau</h5>
+            </a>
+            <span class="navbar-table-link-delete" title="Supprimer le tableau"
+              ><i class="navbar-table-link-delete-icon fa fa-xmark"></i>
+            </span>
           </div>
         </div>
       </nav>
     </header>
     <main class="page-content">
-      <div class="new-input-form-block" id="newInputFormBlock">
-        <h2>Ajouter un champ au formulaire</h2>
-        <form id="newInputForm" class="form" onsubmit="addInputToForm(event)">
-          <div class="form-group">
-            <label for="newInput" class="new-input-label" required
-              >Nom du champ</label
-            >
-            <input type="text" id="newInput" class="new-input" />
-          </div>
+      <section class="new-form-section">
+        <div class="new-input-form-block" id="newInputFormBlock">
+          <h2>Ajouter un champ au formulaire</h2>
+          <form id="newInputForm" class="form" onsubmit="addInputToForm(event)">
+            <div class="form-group">
+              <label for="newInput" class="new-input-label" required
+                >Nom du champ</label
+              >
+              <input type="text" id="newInput" class="new-input" />
+            </div>
 
-          <div class="form-group">
-            <label for="newInputType" class="new-input-label"
-              >Type de champ</label
-            >
-            <select id="newInputType" class="new-input">
-              <option value="text">Texte</option>
-              <option value="number">Nombre</option>
-              <option value="date">Date</option>
-              <option value="month">Mois</option>
-              <option value="timte">Heure</option>
-              <option value="datetime-local">Jour et heure</option>
-              <option value="email">Email</option>
-              <option value="file">Fichier</option>
-              <option value="file">Fichier</option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label for="newInputType" class="new-input-label"
+                >Type de champ</label
+              >
+              <select id="newInputType" class="new-input">
+                <option value="text">Texte</option>
+                <option value="number">Nombre</option>
+                <option value="date">Date</option>
+                <option value="month">Mois</option>
+                <option value="timte">Heure</option>
+                <option value="datetime-local">Jour et heure</option>
+                <option value="email">Email</option>
+                <option value="file">Fichier</option>
+                <option value="file">Fichier</option>
+              </select>
+            </div>
 
-          <div class="form-group">
-            <label for="isRequired">Doit être rempli</label>
-            <input type="checkbox" id="isRequired" />
-          </div>
+            <div class="form-group">
+              <label for="isRequired">Doit être rempli</label>
+              <input type="checkbox" id="isRequired" />
+            </div>
 
-          <button type="submit" class="new-input-submit">Nouveau champ</button>
-          <div id="errorNewInput"></div>
-        </form>
-      </div>
-      <div id="mainFormBlock" class="main-form-block">
-        <h2>Ajout d'une nouvelle entrée</h2>
-        <form id="mainForm" class="form" onsubmit="submitMainForm()">
-          <div id="newObjectForm"></div>
-          <button type="submit" id="mainFormButton" class="new-input-submit">
-            Nouvelle entrée
-          </button>
-        </form>
-      </div>
+            <button type="submit" class="new-input-submit">
+              Nouveau champ
+            </button>
+            <div id="errorNewInput"></div>
+          </form>
+        </div>
+        <div id="mainFormBlock" class="main-form-block">
+          <h2>Ajout d'une nouvelle entrée</h2>
+          <form id="mainForm" class="form" onsubmit="submitMainForm()">
+            <div id="newObjectForm"></div>
+            <button type="submit" id="mainFormButton" class="new-input-submit">
+              Nouvelle entrée
+            </button>
+          </form>
+        </div>
+      </section>
     </main>
   </body>
   <script src="./index.js"></script>

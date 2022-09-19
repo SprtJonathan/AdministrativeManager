@@ -31,28 +31,51 @@
           ></a>
         </div>
         <hr class="navbar-general-spacer" />
-        <div class="navbar-table">
+        <div id="table-list" class="navbar-table">
           <div class="navbar-table-link-block">
             <a
               class="navbar-table-link active"
-              href="../index.html"
+              href="./index.html"
               title="Ajouter un tableau"
               ><i class="fa fa-square-plus active"></i>
             </a>
-          </div>
-          <div class="navbar-table-link-block">
-            <a class="navbar-table-link active" href="" title=""
-              ><i class="fa fa-table"></i>
-              <h5 class="navbar-table-title">Mon tableau</h5>
-            </a>
-            <span class="navbar-table-link-delete" title="Supprimer le tableau"
-              ><i class="navbar-table-link-delete-icon fa fa-xmark"></i>
-            </span>
           </div>
         </div>
       </nav>
     </header>
     <main class="page-content">
+      <section id="table-section" class="new-form-header">
+        <div class="intro-text">
+          <h1>Mes tableaux</h1>
+          <p>
+            Bienvenue dans la section vous permettant de créer et gérer vos
+            tableaux.
+          </p>
+          <p>Pour commencer, cliquez sur "Nouveau tableau"</p>
+        </div>
+        <div id="selector-select-new">
+          <form
+            id="new-table"
+            class="new-table"
+            name="new-table"
+            onsubmit="createNewTable()"
+          >
+            <div class="form-group">
+              <label for="table-name">Nom du tableau</label>
+              <input
+                name="table-name"
+                placeholder="Nom du tableau"
+                type="text"
+                id="newTableName"
+                required
+              />
+            </div>
+            <button type="sumbit">
+              <i class="fa fa-plus"></i>
+            </button>
+          </form>
+        </div>
+      </section>
       <section class="new-form-section">
         <div class="new-input-form-block" id="newInputFormBlock">
           <h2>Ajouter un champ au formulaire</h2>

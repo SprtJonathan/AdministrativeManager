@@ -1,10 +1,133 @@
 const localStorageContent = JSON.parse(localStorage.getItem("formInputs"));
-console.log(localStorageContent);
-
 const newObjectForm = document.getElementById("newObjectForm");
+
+let tables;
+
+if (
+  localStorage.getItem("tables") == null ||
+  localStorage.getItem("tables") == undefined
+) {
+  tables = localStorage.setItem("tables", tables);
+} else {
+  tables = JSON.parse(localStorage.getItem("tables"));
+}
+
+function initPage() {
+  const selectSection = document.getElementById("selector-select-new");
+  console.log(tables);
+
+  if (Array.isArray(tables)) {
+    const selectContainer = document.createElement("div");
+    selectContainer.setAttribute("id", "select-container");
+    selectContainer.setAttribute("class", "intro-select");
+
+    const selectLabel = document.createElement("label");
+    selectLabel.setAttribute("for", "table-selector");
+    selectLabel.textContent = "Sélectionnez le tableau à modifier";
+
+    const selectElement = document.createElement("select");
+    selectElement.setAttribute("name", "table-selector");
+    selectElement.setAttribute("id", "table-selector");
+
+    selectContainer.appendChild(selectLabel);
+    selectLabel.appendChild(selectElement);
+    selectSection.appendChild(selectContainer);
+
+    tables.forEach((table) => {
+      // Create options for the select element
+      const selectOption = document.createElement("option");
+      selectOption.setAttribute("id", table.tableId);
+      selectOption.textContent = table.tableName;
+
+      selectElement.appendChild(selectOption);
+
+      // Create menu buttons for each table
+      const tableButtonContainer = document.createElement("div");
+      tableButtonContainer.setAttribute("class", "navbar-table-link-block");
+
+      const tableButtonLink = document.createElement("a");
+      tableButtonLink.setAttribute("class", "navbar-table-link");
+      tableButtonLink.setAttribute("href", "./table.html?id=" + table.tableId);
+      tableButtonLink.setAttribute("title", table.tableName);
+      tableButtonContainer.appendChild(tableButtonLink);
+
+      const tableLogo = document.createElement("i");
+      tableLogo.setAttribute("class", "fa fa-table");
+      tableButtonLink.appendChild(tableLogo);
+
+      const tableTitle = document.createElement("h5");
+      tableTitle.setAttribute("class", "navbar-table-title");
+      tableTitle.textContent = table.tableName;
+      tableButtonLink.appendChild(tableTitle);
+
+      const closeButtonSpan = document.createElement("span");
+      closeButtonSpan.setAttribute("id", "delete-table-" + table.tableId);
+      closeButtonSpan.setAttribute("class", "navbar-table-link-delete");
+      closeButtonSpan.setAttribute("title", "Supprimer le tableau");
+      tableButtonContainer.appendChild(closeButtonSpan);
+
+      const closeButtonIcon = document.createElement("i");
+      closeButtonIcon.setAttribute(
+        "class",
+        "navbar-table-link-delete-icon fa fa-xmark"
+      );
+      closeButtonSpan.appendChild(closeButtonIcon);
+
+      document.getElementById("table-list").appendChild(tableButtonContainer);
+    });
+    return selectElement;
+  }
+}
+
+let selectedTable;
+function setSelectedTable() {
+  const selectedTableOption = selectTable.value;
+
+  selectedTable = selectTable.options[selectTable.selectedIndex];
+}
+
+const selectTable = initPage();
+
+setSelectedTable();
+
+selectTable.addEventListener("change", () => {
+  setSelectedTable();
+  console.log(selectedTable);
+});
+
+// Function used to create a new form to the tool
+function createNewTable() {
+  const tableName = document.getElementById("newTableName").value;
+
+  console.log(tableName);
+
+  const tableId = tableName.split(" ").join("_") + "-" + Date.now();
+
+  const newTable = {
+    tableName: tableName,
+    tableId: tableId,
+    tableInputs: "",
+    tableData: "",
+  };
+
+  if (Array.isArray(tables)) {
+    tables.push(newTable);
+  } else {
+    tables = [];
+    tables.push(newTable);
+  }
+
+  localStorage.setItem("tables", JSON.stringify(tables));
+}
 
 function addInputToForm(event) {
   event.preventDefault();
+
+  const selectedTableContent = tables.find((table) => {
+    return table.tableId === selectedTable.id;
+  });
+
+  console.log(selectedTableContent);
 
   const newInputName = document.getElementById("newInput");
   const newInputType = document.getElementById("newInputType");

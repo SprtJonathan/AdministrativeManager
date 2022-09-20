@@ -53,31 +53,33 @@
           </p>
           <p>Pour commencer, cliquez sur "Nouveau tableau"</p>
         </div>
-        <div id="selector-select-new">
+        <div id="selector-select-new" class="select-new-table">
           <form
             id="new-table"
             class="new-table"
             name="new-table"
             onsubmit="createNewTable()"
           >
-            <div class="form-group">
-              <label for="table-name">Nom du tableau</label>
+            <label for="table-name">Nom du tableau</label>
+            <div class="form-group-new-table">
               <input
                 name="table-name"
+                class="table-name-input"
                 placeholder="Nom du tableau"
                 type="text"
                 id="newTableName"
                 required
               />
+
+              <button type="sumbit">
+                <i class="fa fa-plus"></i>
+              </button>
             </div>
-            <button type="sumbit">
-              <i class="fa fa-plus"></i>
-            </button>
           </form>
         </div>
       </section>
       <section class="new-form-section">
-        <div class="new-input-form-block" id="newInputFormBlock">
+        <div id="newInputFormBlock" class="form-block">
           <h2>Ajouter un champ au formulaire</h2>
           <form id="newInputForm" class="form" onsubmit="addInputToForm(event)">
             <div class="form-group">
@@ -108,14 +110,13 @@
               <label for="isRequired">Doit être rempli</label>
               <input type="checkbox" id="isRequired" />
             </div>
-
             <button type="submit" class="new-input-submit">
               Nouveau champ
             </button>
             <div id="errorNewInput"></div>
           </form>
         </div>
-        <div id="mainFormBlock" class="main-form-block">
+        <div id="mainFormBlock" class="form-block">
           <h2>Ajout d'une nouvelle entrée</h2>
           <form id="mainForm" class="form" onsubmit="submitMainForm()">
             <div id="newObjectForm"></div>

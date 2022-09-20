@@ -1,4 +1,3 @@
-const localStorageContent = JSON.parse(localStorage.getItem("formInputs"));
 const newObjectForm = document.getElementById("newObjectForm");
 
 let tables;
@@ -17,83 +16,127 @@ function initPage() {
   console.log(tables);
 
   if (Array.isArray(tables)) {
-    const selectContainer = document.createElement("div");
-    selectContainer.setAttribute("id", "select-container");
-    selectContainer.setAttribute("class", "intro-select");
+    if (tables.length > 0) {
+      const selectContainer = document.createElement("div");
+      selectContainer.setAttribute("id", "select-container");
+      selectContainer.setAttribute("class", "intro-select");
 
-    const selectLabel = document.createElement("label");
-    selectLabel.setAttribute("for", "table-selector");
-    selectLabel.textContent = "Sélectionnez le tableau à modifier";
+      const selectLabel = document.createElement("label");
+      selectLabel.setAttribute("for", "table-selector");
+      selectLabel.textContent = "Sélection du tableau";
 
-    const selectElement = document.createElement("select");
-    selectElement.setAttribute("name", "table-selector");
-    selectElement.setAttribute("id", "table-selector");
+      const selectElement = document.createElement("select");
+      selectElement.setAttribute("name", "table-selector");
+      selectElement.setAttribute("id", "tableSelector");
+      selectElement.setAttribute("class", "table-select");
 
-    selectContainer.appendChild(selectLabel);
-    selectLabel.appendChild(selectElement);
-    selectSection.appendChild(selectContainer);
+      selectContainer.appendChild(selectLabel);
+      selectContainer.appendChild(selectElement);
+      selectSection.appendChild(selectContainer);
 
-    tables.forEach((table) => {
-      // Create options for the select element
-      const selectOption = document.createElement("option");
-      selectOption.setAttribute("id", table.tableId);
-      selectOption.textContent = table.tableName;
+      tables.forEach((table) => {
+        // Create options for the select element
+        const selectOption = document.createElement("option");
+        selectOption.setAttribute("id", table.tableId);
+        selectOption.setAttribute("class", "select-options");
+        selectOption.textContent = table.tableName;
 
-      selectElement.appendChild(selectOption);
+        selectElement.appendChild(selectOption);
 
-      // Create menu buttons for each table
-      const tableButtonContainer = document.createElement("div");
-      tableButtonContainer.setAttribute("class", "navbar-table-link-block");
+        // Create menu buttons for each table
+        const tableButtonContainer = document.createElement("div");
+        tableButtonContainer.setAttribute("class", "navbar-table-link-block");
 
-      const tableButtonLink = document.createElement("a");
-      tableButtonLink.setAttribute("class", "navbar-table-link");
-      tableButtonLink.setAttribute("href", "./table.html?id=" + table.tableId);
-      tableButtonLink.setAttribute("title", table.tableName);
-      tableButtonContainer.appendChild(tableButtonLink);
+        const tableButtonLink = document.createElement("a");
+        tableButtonLink.setAttribute("class", "navbar-table-link");
+        tableButtonLink.setAttribute(
+          "href",
+          "./table.html?id=" + table.tableId
+        );
+        tableButtonLink.setAttribute("title", table.tableName);
+        tableButtonContainer.appendChild(tableButtonLink);
 
-      const tableLogo = document.createElement("i");
-      tableLogo.setAttribute("class", "fa fa-table");
-      tableButtonLink.appendChild(tableLogo);
+        const tableLogo = document.createElement("i");
+        tableLogo.setAttribute("class", "fa fa-table");
+        tableButtonLink.appendChild(tableLogo);
 
-      const tableTitle = document.createElement("h5");
-      tableTitle.setAttribute("class", "navbar-table-title");
-      tableTitle.textContent = table.tableName;
-      tableButtonLink.appendChild(tableTitle);
+        const tableTitle = document.createElement("h5");
+        tableTitle.setAttribute("class", "navbar-table-title");
+        tableTitle.textContent = table.tableName;
+        tableButtonLink.appendChild(tableTitle);
 
-      const closeButtonSpan = document.createElement("span");
-      closeButtonSpan.setAttribute("id", "delete-table-" + table.tableId);
-      closeButtonSpan.setAttribute("class", "navbar-table-link-delete");
-      closeButtonSpan.setAttribute("title", "Supprimer le tableau");
-      tableButtonContainer.appendChild(closeButtonSpan);
+        const closeButtonSpan = document.createElement("span");
+        closeButtonSpan.setAttribute("id", "deleteTable-" + table.tableId);
+        closeButtonSpan.setAttribute("class", "navbar-table-link-delete");
+        closeButtonSpan.setAttribute("title", "Supprimer le tableau");
+        tableButtonContainer.appendChild(closeButtonSpan);
 
-      const closeButtonIcon = document.createElement("i");
-      closeButtonIcon.setAttribute(
-        "class",
-        "navbar-table-link-delete-icon fa fa-xmark"
-      );
-      closeButtonSpan.appendChild(closeButtonIcon);
+        const closeButtonIcon = document.createElement("i");
+        closeButtonIcon.setAttribute(
+          "id",
+          "deleteTable-" + table.tableId + "-icon"
+        );
+        closeButtonIcon.setAttribute(
+          "class",
+          "navbar-table-link-delete-icon fa fa-xmark"
+        );
+        closeButtonSpan.appendChild(closeButtonIcon);
 
-      document.getElementById("table-list").appendChild(tableButtonContainer);
-    });
-    return selectElement;
+        closeButtonSpan.addEventListener("click", (e) => {
+          const tableToDelete = e.target.id.split("-")[1];
+          deleteTable(tableToDelete);
+          console.log(tableToDelete);
+        });
+
+        document.getElementById("table-list").appendChild(tableButtonContainer);
+      });
+      return selectElement;
+    }
   }
 }
 
-let selectedTable;
+// Asign the localstorage variable to the select value if none is set
 function setSelectedTable() {
-  const selectedTableOption = selectTable.value;
+  selectedTableOption = selectTable.options[selectTable.selectedIndex];
+  console.log(selectedTableOption.value);
+  localStorage.setItem("selected-table", selectedTableOption.id);
 
-  selectedTable = selectTable.options[selectTable.selectedIndex];
+  if (localStorage.getItem("selected-table")) {
+    selectTable.options[localStorage.getItem("selected-table")].selected = true;
+  }
+
+  selectedTable = tables.find((table) => {
+    return table.tableId === selectedTableOption.id;
+  });
+  selectedTableIndex = tables.indexOf(selectedTable);
+  location.reload();
 }
 
 const selectTable = initPage();
 
-setSelectedTable();
+// Initialization of the variables of the selected table
+let selectedTableOption, selectedTable, selectedTableIndex;
+
+if (localStorage.getItem("selected-table")) {
+  selectTable.options[localStorage.getItem("selected-table")].selected = true;
+  selectedTableOption =
+    selectTable.options[localStorage.getItem("selected-table")];
+} else {
+  selectedTableOption = selectTable.options[selectTable.selectedIndex];
+}
+console.log(selectedTableOption);
+selectedTable = tables.find((table) => {
+  return table.tableId === selectedTableOption.id;
+});
+selectedTableIndex = tables.indexOf(selectedTable);
 
 selectTable.addEventListener("change", () => {
-  setSelectedTable();
   console.log(selectedTable);
+  console.log(selectedTableIndex);
+  setSelectedTable();
 });
+
+//console.log(selectedTableOption);
 
 // Function used to create a new form to the tool
 function createNewTable() {
@@ -101,13 +144,14 @@ function createNewTable() {
 
   console.log(tableName);
 
-  const tableId = tableName.split(" ").join("_") + "-" + Date.now();
+  // We create a unique ID for each table to allow for an easier identification by the code
+  const tableId = tableName.split(" ").join("_") + "_" + Date.now();
 
   const newTable = {
     tableName: tableName,
     tableId: tableId,
-    tableInputs: "",
-    tableData: "",
+    tableInputs: [],
+    tableData: [],
   };
 
   if (Array.isArray(tables)) {
@@ -120,14 +164,26 @@ function createNewTable() {
   localStorage.setItem("tables", JSON.stringify(tables));
 }
 
+// Function that handles the deletion of a table
+function deleteTable(idOfTable) {
+  // We look for the table we want to delete in the global tables array
+  const tableToDelete = tables.find((table) => table.tableId === idOfTable);
+  // console.log(tableToDelete);
+  console.log(tables.indexOf(tableToDelete));
+  // Now we register the table's index
+  const tableIndex = tables.indexOf(tableToDelete);
+  tables.splice(tableIndex, 1);
+  localStorage.setItem("tables", JSON.stringify(tables));
+  location.reload();
+}
+
+// Function that allows to create a new input in the main form
 function addInputToForm(event) {
   event.preventDefault();
 
-  const selectedTableContent = tables.find((table) => {
-    return table.tableId === selectedTable.id;
-  });
+  const tableInputs = selectedTable.tableInputs;
 
-  console.log(selectedTableContent);
+  // console.log(selectedTable);
 
   const newInputName = document.getElementById("newInput");
   const newInputType = document.getElementById("newInputType");
@@ -145,40 +201,50 @@ function addInputToForm(event) {
   };
 
   // Now we send the new input data to the JSON file
-  if (localStorage.getItem("formInputs") === null) {
+
+  // If the table does not have any inputs yet then we create an array in which all of the inputs will be contained
+  if (tableInputs === []) {
     let newArray = [];
     newArray.push(newInputObject);
-    localStorage.setItem("formInputs", JSON.stringify(newArray));
+    tableInputs = newArray;
+    // Now we register the table's index
+    tables.splice(selectedTableIndex, 1, selectedTable);
+    localStorage.setItem("tables", JSON.stringify(tables));
+  } else if (
+    // Else, we check if the exact same input exists in the table. If it's the case we don't add the new one, if it's not we can add it
+    !selectedTable.tableInputs.some(
+      (e) =>
+        e.name === newInputObject.name &&
+        e.type === newInputObject.type &&
+        e.required === newInputObject.required
+    )
+  ) {
+    let newArray = tableInputs.concat([newInputObject]);
+    selectedTable.tableInputs = newArray;
+    tables.splice(selectedTableIndex, 1, selectedTable);
+    console.log(tables);
+    localStorage.setItem("tables", JSON.stringify(tables));
   } else {
-    let newArray = localStorageContent.concat([newInputObject]);
-    console.log(newArray);
-    if (
-      !localStorageContent.some(
-        (e) =>
-          e.name === newInputObject.name &&
-          e.type === newInputObject.type &&
-          e.required === newInputObject.required
-      )
-    ) {
-      localStorage.setItem("formInputs", JSON.stringify(newArray));
-    }
+    alert("Ce champ est déjà présent à l'identique dans ce tableau");
   }
+
   location.reload();
 }
 
 function getFormInputs() {
-  if (localStorageContent != null) {
-    for (i = 0; i < localStorageContent.length; i++) {
+  if (selectedTable.tableInputs != null) {
+    for (i = 0; i < selectedTable.tableInputs.length; i++) {
       const label = document.createElement("label");
-      label.setAttribute("for", localStorageContent[i].name);
-      label.innerText = localStorageContent[i].name;
+      label.setAttribute("for", selectedTable.tableInputs[i].name);
+      label.innerText = selectedTable.tableInputs[i].name;
 
       const input = document.createElement("input");
-      input.setAttribute("name", localStorageContent[i].name);
-      input.setAttribute("type", localStorageContent[i].type);
-      input.setAttribute("id", localStorageContent[i].name);
-      input.setAttribute("placeholder", localStorageContent[i].name);
-      if (localStorageContent[i].required === true) {
+      input.setAttribute("name", selectedTable.tableInputs[i].name);
+      input.setAttribute("type", selectedTable.tableInputs[i].type);
+      input.setAttribute("id", selectedTable.tableInputs[i].name);
+      input.setAttribute("class", "new-input");
+      input.setAttribute("placeholder", selectedTable.tableInputs[i].name);
+      if (selectedTable.tableInputs[i].required === true) {
         input.setAttribute("required", true);
       }
 
@@ -205,27 +271,34 @@ function getFormInputs() {
 }
 
 function deleteInput(index) {
-  let array = localStorageContent;
+  let array = selectedTable.tableInputs;
   array.splice(index, 1);
   console.log(array);
-  localStorage.setItem("formInputs", JSON.stringify(array));
+  selectedTable.tableInputs = array;
+  tables.splice(selectedTableIndex, 1, selectedTable);
+  localStorage.setItem("tables", JSON.stringify(tables));
   location.reload();
 }
 
 function displayMainForm() {
-  if (localStorageContent != null && localStorageContent.length > 0) {
+  if (
+    selectedTable.tableInputs != null &&
+    selectedTable.tableInputs.length > 0
+  ) {
     console.log("OUIOUI");
     document.getElementById("mainFormBlock").style.display = "flex";
+  } else {
+    document.getElementById("mainFormBlock").style.display = "none";
   }
 }
 
 function submitMainForm() {
   let everyKeys = [];
   let everyValues = [];
-  for (i = 0; i < localStorageContent.length; i++) {
-    everyKeys.push(localStorageContent[i].name);
+  for (i = 0; i < selectedTable.tableInputs.length; i++) {
+    everyKeys.push(selectedTable.tableInputs[i].name);
     everyValues.push(
-      document.getElementById(localStorageContent[i].name).value
+      document.getElementById(selectedTable.tableInputs[i].name).value
     );
   }
   let newObject = {};

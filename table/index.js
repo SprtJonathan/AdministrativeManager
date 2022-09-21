@@ -98,9 +98,7 @@ function setSelectedTable() {
   console.log(selectedTableOption.value);
   localStorage.setItem("selected-table", selectedTableOption.id);
 
-  if (localStorage.getItem("selected-table")) {
-    selectTable.options[localStorage.getItem("selected-table")].selected = true;
-  }
+  selectTable.options[localStorage.getItem("selected-table")].selected = true;
 
   selectedTable = tables.find((table) => {
     return table.tableId === selectedTableOption.id;
@@ -299,9 +297,17 @@ const selectTable = initPage();
 let selectedTableOption, selectedTable, selectedTableIndex;
 if (tables.length > 0) {
   if (localStorage.getItem("selected-table")) {
-    selectTable.options[localStorage.getItem("selected-table")].selected = true;
-    selectedTableOption =
-      selectTable.options[localStorage.getItem("selected-table")];
+    if (selectTable.options[localStorage.getItem("selected-table")]) {
+      selectTable.options[
+        localStorage.getItem("selected-table")
+      ].selected = true;
+      selectedTableOption =
+        selectTable.options[localStorage.getItem("selected-table")];
+    } else {
+      selectTable.options[0].selected = true;
+      selectedTableOption = selectTable.options[0];
+      localStorage.setItem("selected-table", selectedTableOption.id);
+    }
   } else {
     selectedTableOption = selectTable.options[selectTable.selectedIndex];
   }

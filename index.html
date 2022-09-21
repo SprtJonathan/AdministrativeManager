@@ -20,10 +20,16 @@
             title="Accueil"
             ><i class="fa fa-house"></i>
           </a>
-          <a class="navbar-general-link" href="./table/index.html" title="Gestionnaire de tableaux"
+          <a
+            class="navbar-general-link"
+            href="./table/index.html"
+            title="Gestionnaire de tableaux"
             ><i class="fa fa-table"></i
           ></a>
-          <a class="navbar-general-link" href="./table/index.html" title="Formulaires / Sondages"
+          <a
+            class="navbar-general-link"
+            href="./table/index.html"
+            title="Formulaires / Sondages"
             ><i class="fa fa-list"></i
           ></a>
         </div>
@@ -31,44 +37,15 @@
       </nav>
     </header>
     <main class="page-content">
-      <div class="BannerVideoWrapper" data-v-1be833ac="">
-        <video
-          poster="https://static.cdn.lambdageneration.com/video/LG_VideoBanner_v4_frame.jpg"
-          playsinline=""
-          autoplay="autoplay"
-          muted="muted"
-          loop="loop"
-          class="BannerVideo"
-          data-v-1be833ac=""
-          width="100%"
-          height="100%"
-        >
-          <source
-            src="https://static.cdn.lambdageneration.com/video/LG_VideoBanner_v4.mp4"
-            type="video/mp4"
-            data-v-1be833ac=""
-          />
-        </video>
-      </div>
-      <div class="BannerVideoWrapper" data-v-1be833ac="">
-        <video
-          poster="https://static.cdn.lambdageneration.com/video/LG_VideoBanner_v4_frame.jpg"
-          playsinline=""
-          autoplay="autoplay"
-          muted="muted"
-          loop="loop"
-          class="BannerVideo"
-          data-v-1be833ac=""
-          width="100%"
-          height="100%"
-        >
-          <source
-            src="https://static.cdn.lambdageneration.com/video/LG_VideoBanner_v4.mp4"
-            type="video/mp4"
-            data-v-1be833ac=""
-          />
-        </video>
-      </div>
+      <section class="homepage-intro-section">
+        <h1>Bonjour <mark id="username"></mark></h1>
+        <p>Bienvenue sur votre outil de gestion en ligne.</p>
+      </section>
+      <section class="homepage-status-report">
+        <div id="table-report" class="">
+          <p>Actuellement, vous avez <mark id="table-number"></mark> tableaux existants.</p>
+        </div>
+      </section>
     </main>
   </body>
   <script src="./index.js"></script>

@@ -1,14 +1,11 @@
 const newObjectForm = document.getElementById("newObjectForm");
 
-let tables;
+let tables = [];
 
-if (
-  localStorage.getItem("tables") == null ||
-  localStorage.getItem("tables") == undefined
-) {
-  tables = localStorage.setItem("tables", tables);
-} else {
+if (localStorage.getItem("tables")) {
   tables = JSON.parse(localStorage.getItem("tables"));
+} else {
+  tables = localStorage.setItem("tables", tables);
 }
 
 function initPage() {
@@ -111,32 +108,6 @@ function setSelectedTable() {
   selectedTableIndex = tables.indexOf(selectedTable);
   location.reload();
 }
-
-const selectTable = initPage();
-
-// Initialization of the variables of the selected table
-let selectedTableOption, selectedTable, selectedTableIndex;
-
-if (localStorage.getItem("selected-table")) {
-  selectTable.options[localStorage.getItem("selected-table")].selected = true;
-  selectedTableOption =
-    selectTable.options[localStorage.getItem("selected-table")];
-} else {
-  selectedTableOption = selectTable.options[selectTable.selectedIndex];
-}
-console.log(selectedTableOption);
-selectedTable = tables.find((table) => {
-  return table.tableId === selectedTableOption.id;
-});
-selectedTableIndex = tables.indexOf(selectedTable);
-
-selectTable.addEventListener("change", () => {
-  console.log(selectedTable);
-  console.log(selectedTableIndex);
-  setSelectedTable();
-});
-
-//console.log(selectedTableOption);
 
 // Function used to create a new form to the tool
 function createNewTable() {
@@ -281,6 +252,11 @@ function deleteInput(index) {
 }
 
 function displayMainForm() {
+  if (selectedTable) {
+    document.getElementById("newInputFormBlock").style.display = "flex";
+  } else {
+    document.getElementById("newInputFormBlock").style.display = "none";
+  }
   if (
     selectedTable.tableInputs != null &&
     selectedTable.tableInputs.length > 0
@@ -317,5 +293,30 @@ function submitMainForm() {
   }
 }
 
-getFormInputs();
-displayMainForm();
+const selectTable = initPage();
+
+// Initialization of the variables of the selected table
+let selectedTableOption, selectedTable, selectedTableIndex;
+if (tables.length > 0) {
+  if (localStorage.getItem("selected-table")) {
+    selectTable.options[localStorage.getItem("selected-table")].selected = true;
+    selectedTableOption =
+      selectTable.options[localStorage.getItem("selected-table")];
+  } else {
+    selectedTableOption = selectTable.options[selectTable.selectedIndex];
+  }
+
+  selectedTable = tables.find((table) => {
+    return table.tableId === selectedTableOption.id;
+  });
+  selectedTableIndex = tables.indexOf(selectedTable);
+
+  selectTable.addEventListener("change", () => {
+    console.log(selectedTable);
+    console.log(selectedTableIndex);
+    setSelectedTable();
+  });
+
+  getFormInputs();
+  displayMainForm();
+}

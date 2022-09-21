@@ -9,4 +9,11 @@ const setTableNumber = () => {
   tableNumberElement.textContent = tableNumber;
 };
 
+const setUserName = () => {
+  const usernameElement = document.getElementById("username");
+
+  usernameElement.textContent = "invité";
+};
+
+setUserName();
 setTableNumber();

@@ -37,13 +37,23 @@
       </nav>
     </header>
     <main class="page-content">
-      <section class="homepage-intro-section">
-        <h1>Bonjour <mark id="username"></mark></h1>
+      <div class="homepage-logo">
+        <img
+          src="./public/assets/img/website-logo.svg"
+          alt="Manastrative logo"
+        />
+      </div>
+      <section class="homepage-header">
+        <h1>Bonjour <mark id="username"></mark>,</h1>
         <p>Bienvenue sur votre outil de gestion en ligne.</p>
       </section>
       <section class="homepage-status-report">
-        <div id="table-report" class="">
-          <p>Actuellement, vous avez <mark id="table-number"></mark> tableaux existants.</p>
+        <div id="table-report" class="table-report">
+          <h2>Vos tableaux</h2>
+          <p>
+            Actuellement, vous avez <mark id="table-number"></mark> tableaux
+            existants.
+          </p>
         </div>
       </section>
     </main>

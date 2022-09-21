@@ -2,16 +2,68 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 
   /* From https://css.glass */
+  width: 95%;
+  margin: auto;
 
-  border-radius: 0px 0px 16px 16px;
+  border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.homepage-header h1 {
+  color: whitesmoke;
+  width: 95%;
+}
+.homepage-header mark {
+  color: #f8b500;
+}
+.homepage-header p {
+  color: whitesmoke;
+  width: 95%;
+  margin: 0 auto 1em;
+  font-size: 20px;
+}
+
+.homepage-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.homepage-status-report {
+  /* From https://css.glass */
+  width: 95%;
+  min-height: 3rem;
+  margin: 1rem auto;
+
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.table-report {
+  width: 95%;
+  margin: 1rem auto;
+}
+.table-report h2 {
+  color: whitesmoke;
+  font-size: 20px;
+}
+.table-report p {
+  color: whitesmoke;
+  font-size: 17px;
+}
+.table-report mark {
+  color: #f8b500;
 }
 
 .searchbar-table-container {

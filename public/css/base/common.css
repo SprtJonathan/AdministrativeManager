@@ -2,7 +2,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  font-family: Roboto, sans-serif;
+  font-family: Raleway;
   margin: 0;
   font-size: 12px;
 
@@ -24,6 +24,13 @@ main.page-content {
 }
 
 h1 {
+  font-size: 25px;
+  margin: 1em auto;
+}
+
+mark{
+  background: transparent;
+  font-weight: 700;
 }
 
 * {

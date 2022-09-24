@@ -3,7 +3,7 @@ const setTableNumber = () => {
 
   let tableNumber = 0;
   if (localStorage.getItem("tables").length) {
-    tableNumber = localStorage.getItem("tables").length;
+    tableNumber = JSON.parse(localStorage.getItem("tables")).length;
   }
 
   tableNumberElement.textContent = tableNumber;

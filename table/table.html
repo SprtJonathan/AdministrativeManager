@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manastrative</title>
+    <title>Données</title>
     <meta name="description" content="" />
     <link rel="stylesheet" href="../public/css/main.css" />
     <link
@@ -14,49 +14,50 @@
     <header>
       <nav class="navbar">
         <div class="navbar-general">
-          <a
-            class="navbar-general-link active"
-            href="./index.html"
-            title="Accueil"
+          <a class="navbar-general-link" href="../index.html" title="Accueil"
             ><i class="fa fa-house"></i>
           </a>
           <a
-            class="navbar-general-link"
-            href="./table/index.html"
+            class="navbar-general-link active"
+            href="./"
             title="Gestionnaire de tableaux"
             ><i class="fa fa-table"></i
           ></a>
           <a
             class="navbar-general-link"
-            href="./table/index.html"
+            href="./"
             title="Formulaires / Sondages"
             ><i class="fa fa-list"></i
           ></a>
         </div>
         <hr class="navbar-general-spacer" />
+        <div class="navbar-general">
+          <div>
+            <a
+              class="navbar-general-link active"
+              href="../index.html"
+              title="Accueil"
+              ><i class="fa fa-square-plus"></i>
+            </a>
+          </div>
+        </div>
       </nav>
     </header>
     <main class="page-content">
-      <div class="homepage-logo">
-        <img
-          src="./public/assets/img/website-logo.svg"
-          alt="Manastrative logo"
-        />
-      </div>
-      <section class="homepage-header">
-        <h1>Bonjour <mark id="username"></mark>,</h1>
-        <p>Bienvenue sur votre outil de gestion en ligne.</p>
-      </section>
-      <section class="homepage-status-report">
-        <div id="table-report" class="table-report">
-          <h2>Vos tableaux</h2>
-          <p>
-            Actuellement, vous avez <mark id="table-number"></mark> tableaux
-            existants.
-          </p>
+      <div class="searchbar-table-container">
+        <div class="searchbar-container">
+          <label for="searchbar" class="searchbar-label">Rechercher</label>
+          <input
+            id="searchbar"
+            class="searchbar"
+            name="searchbar"
+            type="text"
+            onkeyup="searchEntries()"
+          />
         </div>
-      </section>
+        <div id="table-container" class="table-container"></div>
+      </div>
     </main>
   </body>
-  <script src="./index.js"></script>
+  <script src="./table.js"></script>
 </html>

@@ -1,0 +1,132 @@
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajout des données</title>
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="../public/css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="navbar-general">
+          <a class="navbar-general-link" href="../index.html" title="Accueil"
+            ><i class="fa fa-house"></i>
+          </a>
+          <a
+            class="navbar-general-link active"
+            href="./"
+            title="Gestionnaire de tableaux"
+            ><i class="fa fa-table"></i
+          ></a>
+          <a
+            class="navbar-general-link"
+            href="./"
+            title="Formulaires / Sondages"
+            ><i class="fa fa-list"></i
+          ></a>
+        </div>
+        <hr class="navbar-general-spacer" />
+        <div id="table-list" class="navbar-table">
+          <div class="navbar-table-link-block">
+            <a
+              class="navbar-table-link active"
+              href="./index.html"
+              title="Ajouter un tableau"
+              ><i class="fa fa-square-plus active"></i>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="page-content">
+      <section id="table-section" class="new-form-header">
+        <div class="intro-text">
+          <h1>Mes tableaux</h1>
+          <p>
+            Bienvenue dans la section vous permettant de créer et gérer vos
+            tableaux.
+          </p>
+          <p>Pour commencer, cliquez sur "Nouveau tableau"</p>
+        </div>
+        <div id="selector-select-new" class="select-new-table">
+          <form
+            id="new-table"
+            class="new-table"
+            name="new-table"
+            onsubmit="createNewTable()"
+          >
+            <label for="table-name">Nom du tableau</label>
+            <div class="form-group-new-table">
+              <input
+                name="table-name"
+                class="table-name-input"
+                placeholder="Nom du tableau"
+                type="text"
+                id="newTableName"
+                required
+              />
+
+              <button type="sumbit">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+      <section class="new-form-section">
+        <div id="newInputFormBlock" class="form-block">
+          <h2>Ajouter un champ au formulaire</h2>
+          <form id="newInputForm" class="form" onsubmit="addInputToForm(event)">
+            <div class="form-group">
+              <label for="newInput" class="new-input-label" required
+                >Nom du champ</label
+              >
+              <input type="text" id="newInput" class="new-input" />
+            </div>
+
+            <div class="form-group">
+              <label for="newInputType" class="new-input-label"
+                >Type de champ</label
+              >
+              <select id="newInputType" class="new-input">
+                <option value="text">Texte</option>
+                <option value="number">Nombre</option>
+                <option value="date">Date</option>
+                <option value="month">Mois</option>
+                <option value="timte">Heure</option>
+                <option value="datetime-local">Jour et heure</option>
+                <option value="email">Email</option>
+                <option value="file">Fichier</option>
+                <option value="file">Fichier</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="isRequired">Doit être rempli</label>
+              <input type="checkbox" id="isRequired" />
+            </div>
+            <button type="submit" class="new-input-submit">
+              Nouveau champ
+            </button>
+            <div id="errorNewInput"></div>
+          </form>
+        </div>
+        <div id="mainFormBlock" class="form-block">
+          <h2>Ajout d'une nouvelle entrée</h2>
+          <form id="mainForm" class="form" onsubmit="submitMainForm()">
+            <div id="newObjectForm"></div>
+            <button type="submit" id="mainFormButton" class="new-input-submit">
+              Nouvelle entrée
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+  <script src="./index.js"></script>
+</html>

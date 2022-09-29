@@ -91,6 +91,18 @@ function initPage() {
     }
   }
 }
+// Function that handles the deletion of a table
+function deleteTable(idOfTable) {
+  // We look for the table we want to delete in the global tables array
+  const tableToDelete = tables.find((table) => table.tableId === idOfTable);
+  // console.log(tableToDelete);
+  console.log(tables.indexOf(tableToDelete));
+  // Now we register the table's index
+  const tableIndex = tables.indexOf(tableToDelete);
+  tables.splice(tableIndex, 1);
+  localStorage.setItem("tables", JSON.stringify(tables));
+  location.reload();
+}
 
 // Asign the localstorage variable to the select value if none is set
 function setSelectedTable() {
@@ -131,19 +143,6 @@ function createNewTable() {
   }
 
   localStorage.setItem("tables", JSON.stringify(tables));
-}
-
-// Function that handles the deletion of a table
-function deleteTable(idOfTable) {
-  // We look for the table we want to delete in the global tables array
-  const tableToDelete = tables.find((table) => table.tableId === idOfTable);
-  // console.log(tableToDelete);
-  console.log(tables.indexOf(tableToDelete));
-  // Now we register the table's index
-  const tableIndex = tables.indexOf(tableToDelete);
-  tables.splice(tableIndex, 1);
-  localStorage.setItem("tables", JSON.stringify(tables));
-  location.reload();
 }
 
 // Function that allows to create a new input in the main form
@@ -279,15 +278,18 @@ function submitMainForm() {
   everyKeys.forEach((key, i) => (newObject[key] = everyValues[i]));
   console.log(newObject);
 
-  if (JSON.parse(localStorage.getItem("data")) === null) {
+  if (selectedTable.tableData === null) {
     let newArray = [];
     newArray.push(newObject);
-    localStorage.setItem("data", JSON.stringify(newArray));
+
+    selectedTable.tableData = newArray;
+    localStorage.setItem("tables", JSON.stringify(tables));
   } else {
-    let newArray = JSON.parse(localStorage.getItem("data")).concat([newObject]);
+    let newArray = selectedTable.tableData.concat([newObject]);
     console.log(newArray);
 
-    localStorage.setItem("data", JSON.stringify(newArray));
+    selectedTable.tableData = newArray;
+    localStorage.setItem("tables", JSON.stringify(tables));
   }
 }
 

@@ -81,7 +81,15 @@ function initPage() {
 
         closeButtonSpan.addEventListener("click", (e) => {
           const tableToDelete = e.target.id.split("-")[1];
-          deleteTable(tableToDelete);
+          confirmationModal(
+            "delete-table",
+            "Êtes-vous sûr de vouloir supprimer le tableau <mark>" +
+              table.tableName +
+              "</mark>?",
+            "Oui, supprimer",
+            console.log("oui")
+          );
+
           console.log(tableToDelete);
         });
 

@@ -81,15 +81,7 @@ function initPage() {
 
         closeButtonSpan.addEventListener("click", (e) => {
           const tableToDelete = e.target.id.split("-")[1];
-          confirmationModal(
-            "delete-table",
-            "Êtes-vous sûr de vouloir supprimer le tableau <mark>" +
-              table.tableName +
-              "</mark>?",
-            "Oui, supprimer",
-            console.log("oui")
-          );
-
+          deleteTable(tableToDelete);
           console.log(tableToDelete);
         });
 
@@ -101,15 +93,28 @@ function initPage() {
 }
 // Function that handles the deletion of a table
 function deleteTable(idOfTable) {
-  // We look for the table we want to delete in the global tables array
-  const tableToDelete = tables.find((table) => table.tableId === idOfTable);
-  // console.log(tableToDelete);
-  console.log(tables.indexOf(tableToDelete));
-  // Now we register the table's index
-  const tableIndex = tables.indexOf(tableToDelete);
-  tables.splice(tableIndex, 1);
-  localStorage.setItem("tables", JSON.stringify(tables));
-  location.reload();
+  let confirmDeleteTable = false;
+  confirmationModal(
+    "delete-table",
+    "Êtes-vous sûr de vouloir supprimer le tableau <mark>" +
+      idOfTable +
+      "</mark>?",
+    "Oui, supprimer",
+    confirmDeleteTable
+  );
+  console.log(confirmDeleteTable)
+  if (confirmDeleteTable) {
+    console.log(confirmDeleteTable)
+    // We look for the table we want to delete in the global tables array
+    const tableToDelete = tables.find((table) => table.tableId === idOfTable);
+    // console.log(tableToDelete);
+    console.log(tables.indexOf(tableToDelete));
+    // Now we register the table's index
+    const tableIndex = tables.indexOf(tableToDelete);
+    // tables.splice(tableIndex, 1);
+    // localStorage.setItem("tables", JSON.stringify(tables));
+    // location.reload();
+  }
 }
 
 // Asign the localstorage variable to the select value if none is set

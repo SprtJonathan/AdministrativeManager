@@ -2,10 +2,8 @@ function confirmationModal(
   modalId,
   messageContent,
   proceedButtonText,
-  functionToTrigger
+  valueToChange
 ) {
-  console.log(functionToTrigger);
-
   const confirmationModalContainer = document.createElement("div");
   confirmationModalContainer.setAttribute("id", modalId);
   confirmationModalContainer.setAttribute("class", "confirmation-modal");
@@ -32,8 +30,7 @@ function confirmationModal(
   proceedButton.setAttribute("class", "confirmation-button-success");
   proceedButton.innerHTML = proceedButtonText;
   proceedButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    functionToTrigger;
+    valueToChange = true;
     confirmationModalContainer.remove();
   });
 
@@ -42,7 +39,7 @@ function confirmationModal(
   abortButton.setAttribute("class", "confirmation-button-abort");
   abortButton.textContent = "Annuler";
   abortButton.addEventListener("click", (e) => {
-    e.preventDefault();
+    valueToChange = false
     confirmationModalContainer.remove();
   });
 

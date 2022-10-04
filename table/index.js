@@ -81,7 +81,19 @@ function initPage() {
 
         closeButtonSpan.addEventListener("click", (e) => {
           const tableToDelete = e.target.id.split("-")[1];
-          deleteTable(tableToDelete);
+
+          confirmationModal(
+            "delete-table",
+            "Êtes-vous sûr de vouloir supprimer le tableau <mark>" +
+              table.tableName +
+              "</mark>?",
+            "Oui, supprimer",
+            (e) => {
+              console.log("oui");
+              deleteTable(tableToDelete);
+            }
+          );
+
           console.log(tableToDelete);
         });
 
@@ -93,28 +105,15 @@ function initPage() {
 }
 // Function that handles the deletion of a table
 function deleteTable(idOfTable) {
-  let confirmDeleteTable = false;
-  confirmationModal(
-    "delete-table",
-    "Êtes-vous sûr de vouloir supprimer le tableau <mark>" +
-      idOfTable +
-      "</mark>?",
-    "Oui, supprimer",
-    confirmDeleteTable
-  );
-  console.log(confirmDeleteTable)
-  if (confirmDeleteTable) {
-    console.log(confirmDeleteTable)
-    // We look for the table we want to delete in the global tables array
-    const tableToDelete = tables.find((table) => table.tableId === idOfTable);
-    // console.log(tableToDelete);
-    console.log(tables.indexOf(tableToDelete));
-    // Now we register the table's index
-    const tableIndex = tables.indexOf(tableToDelete);
-    // tables.splice(tableIndex, 1);
-    // localStorage.setItem("tables", JSON.stringify(tables));
-    // location.reload();
-  }
+  // We look for the table we want to delete in the global tables array
+  const tableToDelete = tables.find((table) => table.tableId === idOfTable);
+  // console.log(tableToDelete);
+  console.log(tables.indexOf(tableToDelete));
+  // Now we register the table's index
+  const tableIndex = tables.indexOf(tableToDelete);
+  tables.splice(tableIndex, 1);
+  localStorage.setItem("tables", JSON.stringify(tables));
+  location.reload();
 }
 
 // Asign the localstorage variable to the select value if none is set
@@ -287,8 +286,8 @@ function submitMainForm() {
       document.getElementById(selectedTable.tableInputs[i].name).value
     );
   }
-  let newObject = {};
-  everyKeys.forEach((key, i) => (newObject[key] = everyValues[i]));
+  let newObject = { lineId: "line-" + Date.now(), lineObjects: {} };
+  everyKeys.forEach((key, i) => (newObject.lineObjects[key] = everyValues[i]));
   console.log(newObject);
 
   if (selectedTable.tableData === null) {

@@ -2,7 +2,7 @@ function confirmationModal(
   modalId,
   messageContent,
   proceedButtonText,
-  valueToChange
+  functionToExecute,
 ) {
   const confirmationModalContainer = document.createElement("div");
   confirmationModalContainer.setAttribute("id", modalId);
@@ -30,7 +30,7 @@ function confirmationModal(
   proceedButton.setAttribute("class", "confirmation-button-success");
   proceedButton.innerHTML = proceedButtonText;
   proceedButton.addEventListener("click", (e) => {
-    valueToChange = true;
+    functionToExecute();
     confirmationModalContainer.remove();
   });
 
@@ -39,7 +39,6 @@ function confirmationModal(
   abortButton.setAttribute("class", "confirmation-button-abort");
   abortButton.textContent = "Annuler";
   abortButton.addEventListener("click", (e) => {
-    valueToChange = false
     confirmationModalContainer.remove();
   });
 

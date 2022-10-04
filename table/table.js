@@ -5,6 +5,7 @@ const tables = JSON.parse(localStorage.getItem("tables"));
 const tableId = urlParams.get("id");
 const table = tables.find((table) => table.tableId === tableId);
 const tableName = table.tableName;
+const objectsForTable = table.tableData;
 
 const filenameInput = document.getElementById("filename-input");
 filenameInput.setAttribute("value", tableName);
@@ -13,7 +14,11 @@ if (!table) {
   location.href = "./";
 }
 
-let objectsForTable = table.tableData;
+let tableData = [];
+
+objectsForTable.forEach((line) => tableData.push(line.lineObjects));
+
+console.log(tableData);
 
 function initPage() {
   console.log(tables);
@@ -68,7 +73,17 @@ function initPage() {
 
         closeButtonSpan.addEventListener("click", (e) => {
           const tableToDelete = e.target.id.split("-")[1];
-          deleteTable(tableToDelete);
+          confirmationModal(
+            "delete-table",
+            "Êtes-vous sûr de vouloir supprimer le tableau <mark>" +
+              table.tableName +
+              "</mark>?",
+            "Oui, supprimer",
+            (e) => {
+              console.log("oui");
+              deleteTable(tableToDelete);
+            }
+          );
           console.log(tableToDelete);
         });
 
@@ -94,13 +109,13 @@ function deleteTable(idOfTable) {
 
 function initVariables() {
   let keys = [];
-  if (table.tableData != null || table.tableData.length != 0) {
-    for (i = 0; i < table.tableData.length; i++) {
-      for (j = 0; j < Object.keys(table.tableData[i]).length; j++) {
-        console.log(Object.keys(table.tableData[i])[j]);
+  if (tableData != null || tableData != 0) {
+    for (i = 0; i < tableData.length; i++) {
+      for (j = 0; j < Object.keys(tableData[i]).length; j++) {
+        console.log(Object.keys(tableData[i])[j]);
         // This verification prevent key duplications
-        if (!keys.some((e) => e === Object.keys(table.tableData[i])[j])) {
-          keys.push(Object.keys(table.tableData[i])[j]);
+        if (!keys.some((e) => e === Object.keys(tableData[i])[j])) {
+          keys.push(Object.keys(tableData[i])[j]);
         }
       }
     }
@@ -144,7 +159,7 @@ function createTable(data, sortBy) {
   const tbody = document.createElement("tbody");
   for (i = 0; i < data.length; i++) {
     const tr = document.createElement("tr");
-    tr.setAttribute("id", "tr-column-" + i);
+    tr.setAttribute("id", "tr-line-" + i);
     for (j = 0; j < tableColumns.length; j++) {
       const td = document.createElement("td");
       if (data[i][tableColumns[j]] != null && data[i][tableColumns[j]] != "") {
@@ -158,12 +173,20 @@ function createTable(data, sortBy) {
 
     // HTML code that deletes the line
     const tdDelete = document.createElement("td");
-    tdDelete.setAttribute("class", "td-delete")
+    tdDelete.setAttribute("class", "td-delete");
     const deleteLineButton = document.createElement("button");
     deleteLineButton.textContent = "X";
 
+    const lineId = objectsForTable[i].lineId;
     deleteLineButton.addEventListener("click", (e) => {
-      deleteTableLine(tr.id);
+      confirmationModal(
+        "delete-table",
+        "Êtes-vous sûr de vouloir supprimer cette ligne du tableau?",
+        "Oui, supprimer",
+        (e) => {
+          deleteTableLine(lineId);
+        }
+      );
     });
 
     tdDelete.appendChild(deleteLineButton);
@@ -176,18 +199,46 @@ function createTable(data, sortBy) {
   document.getElementById("table-container").appendChild(table);
 }
 
-createTable(objectsForTable, tableColumns[0]);
+createTable(tableData, tableColumns[0]);
 
 function deleteTableLine(idOfLine) {
   console.log(idOfLine);
+
+  // First we get the line we want to delete
+  const lineToDelete = objectsForTable.find((element) => {
+    return element.lineId === idOfLine;
+  });
+
+  console.log(lineToDelete);
+
+  // Then we get the its index
+  const lineIndex = tableData.indexOf(lineToDelete);
+  tableData.splice(lineIndex, 1);
+
+  // The goal : replace the table with the one with updated lines
+
+  let array = table.tableData;
+
+  const currentTable = tables.find((table) => table.tableId === tableId);
+  // Now we register the table's index
+  const tableIndex = tes.ablindexOf(currentTable);
+
+  array.splice(tableIndex, 1);
+  console.log(array);
+  table.tableData = array;
+  tables.splice(tableIndex, 1, table);
+
+  console.log(tables)
+  // localStorage.setItem("tables", JSON.stringify(tables));
+  // location.reload();
 }
 
 function searchEntries() {
   let value = document.getElementById("searchbar").value;
   if (value == "") {
-    objectsForTable = table.tableData;
+    objectsForTable = tableData;
   } else {
-    objectsForTable = table.tableData.filter((entry) => {
+    objectsForTable = tableData.filter((entry) => {
       return Object.keys(entry).some((key) =>
         entry[key].toLowerCase().includes(value.toLowerCase())
       );
@@ -333,8 +384,8 @@ function submitMainForm(e) {
     everyKeys.push(table.tableInputs[i].name);
     everyValues.push(document.getElementById(table.tableInputs[i].name).value);
   }
-  let newObject = {};
-  everyKeys.forEach((key, i) => (newObject[key] = everyValues[i]));
+  let newObject = { lineId: "line-" + Date.now(), lineObjects: {} };
+  everyKeys.forEach((key, i) => (newObject.lineObjects[key] = everyValues[i]));
   console.log(newObject);
 
   if (table.tableData === null) {

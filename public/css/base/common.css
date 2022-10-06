@@ -28,7 +28,7 @@ h1 {
   margin: 1em auto;
 }
 
-mark{
+mark {
   background: transparent;
   font-weight: 700;
 }
@@ -66,6 +66,7 @@ label {
   font-size: 14px;
   font-weight: 600;
   color: #000;
+  margin: 10px 0;
 }
 
 input {

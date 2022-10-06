@@ -18,10 +18,10 @@ let tableData = [];
 
 objectsForTable.forEach((line) => tableData.push(line.lineObjects));
 
-console.log(tableData);
+// console.log(tableData);
 
 function initPage() {
-  console.log(tables);
+  // console.log(tables);
   const tableHeaderSection = document.getElementById("table-intro");
   const tableTitle = document.createElement("h1");
   tableTitle.setAttribute("class", "table-title");
@@ -112,7 +112,7 @@ function initVariables() {
   if (tableData != null || tableData != 0) {
     for (i = 0; i < tableData.length; i++) {
       for (j = 0; j < Object.keys(tableData[i]).length; j++) {
-        console.log(Object.keys(tableData[i])[j]);
+        // console.log(Object.keys(tableData[i])[j]);
         // This verification prevent key duplications
         if (!keys.some((e) => e === Object.keys(tableData[i])[j])) {
           keys.push(Object.keys(tableData[i])[j]);
@@ -156,42 +156,56 @@ function createTable(data, sortBy) {
   }
   thead.appendChild(tr);
   table.appendChild(thead);
+  console.log(data);
   const tbody = document.createElement("tbody");
-  for (i = 0; i < data.length; i++) {
-    const tr = document.createElement("tr");
-    tr.setAttribute("id", "tr-line-" + i);
-    for (j = 0; j < tableColumns.length; j++) {
-      const td = document.createElement("td");
-      if (data[i][tableColumns[j]] != null && data[i][tableColumns[j]] != "") {
-        td.innerText = data[i][tableColumns[j]];
-      } else if (data[i][tableColumns[j]] == "") {
-        console.log("oui");
-        td.innerText = "/";
-      }
-      tr.appendChild(td);
-    }
-
-    // HTML code that deletes the line
-    const tdDelete = document.createElement("td");
-    tdDelete.setAttribute("class", "td-delete");
-    const deleteLineButton = document.createElement("button");
-    deleteLineButton.textContent = "X";
-
-    const lineId = objectsForTable[i].lineId;
-    deleteLineButton.addEventListener("click", (e) => {
-      confirmationModal(
-        "delete-table",
-        "Êtes-vous sûr de vouloir supprimer cette ligne du tableau?",
-        "Oui, supprimer",
-        (e) => {
-          deleteTableLine(lineId);
+  if (data.length > 0) {
+    for (i = 0; i < data.length; i++) {
+      const tr = document.createElement("tr");
+      tr.setAttribute("id", "tr-line-" + i);
+      for (j = 0; j < tableColumns.length; j++) {
+        const td = document.createElement("td");
+        if (
+          data[i][tableColumns[j]] != null &&
+          data[i][tableColumns[j]] != ""
+        ) {
+          td.innerText = data[i][tableColumns[j]];
+        } else if (data[i][tableColumns[j]] == "") {
+          console.log("oui");
+          td.innerText = "/";
         }
-      );
-    });
+        tr.appendChild(td);
+      }
 
-    tdDelete.appendChild(deleteLineButton);
+      // HTML code that deletes the line
+      const tdDelete = document.createElement("td");
+      tdDelete.setAttribute("class", "td-delete");
+      const deleteLineButton = document.createElement("button");
+      deleteLineButton.textContent = "X";
 
-    tr.appendChild(tdDelete);
+      const lineId = objectsForTable[i].lineId;
+      deleteLineButton.addEventListener("click", (e) => {
+        confirmationModal(
+          "delete-table",
+          "Êtes-vous sûr de vouloir supprimer cette ligne du tableau?",
+          "Oui, supprimer",
+          (e) => {
+            deleteTableLine(lineId);
+          }
+        );
+      });
+
+      tdDelete.appendChild(deleteLineButton);
+
+      tr.appendChild(tdDelete);
+      tbody.appendChild(tr);
+    }
+  } else {
+    const tr = document.createElement("tr");
+    tr.setAttribute('class', "tr-nodata");
+    const noDataDiv = document.createElement("div");
+    noDataDiv.setAttribute('class', "no-data");
+    tr.appendChild(noDataDiv);
+    noDataDiv.innerText = "Aucune donnée trouvée";
     tbody.appendChild(tr);
   }
   table.appendChild(tbody);
@@ -202,52 +216,53 @@ function createTable(data, sortBy) {
 createTable(tableData, tableColumns[0]);
 
 function deleteTableLine(idOfLine) {
-  console.log(idOfLine);
-
   // First we get the line we want to delete
   const lineToDelete = objectsForTable.find((element) => {
     return element.lineId === idOfLine;
   });
 
-  console.log(lineToDelete);
-
-  // Then we get the its index
-  const lineIndex = tableData.indexOf(lineToDelete);
-  tableData.splice(lineIndex, 1);
+  // Then we get the its index in the table objects list
+  const lineIndex = objectsForTable.indexOf(lineToDelete);
+  objectsForTable.splice(lineIndex, 1);
 
   // The goal : replace the table with the one with updated lines
 
-  let array = table.tableData;
-
   const currentTable = tables.find((table) => table.tableId === tableId);
   // Now we register the table's index
-  const tableIndex = tes.ablindexOf(currentTable);
+  const tableIndex = tables.indexOf(currentTable);
+  // console.log(table);
 
-  array.splice(tableIndex, 1);
-  console.log(array);
-  table.tableData = array;
   tables.splice(tableIndex, 1, table);
 
-  console.log(tables)
-  // localStorage.setItem("tables", JSON.stringify(tables));
-  // location.reload();
+  // console.log(tables);
+  localStorage.setItem("tables", JSON.stringify(tables));
+  location.reload();
 }
 
 function searchEntries() {
   let value = document.getElementById("searchbar").value;
   if (value == "") {
-    objectsForTable = tableData;
+    tableData = [];
+    objectsForTable.forEach((line) => tableData.push(line.lineObjects));
   } else {
-    objectsForTable = tableData.filter((entry) => {
-      return Object.keys(entry).some((key) =>
-        entry[key].toLowerCase().includes(value.toLowerCase())
+    tableData = [];
+    let resultsArray = objectsForTable.filter((entry) => {
+      return Object.keys(entry.lineObjects).some((key) =>
+        entry.lineObjects[key].toLowerCase().includes(value.toLowerCase())
       );
     });
-
-    console.log(objectsForTable);
+    if (resultsArray.length === 0) {
+      tableData = resultsArray;
+    } else {
+      resultsArray.forEach((line) => {
+        tableData.push(line.lineObjects);
+      });
+    }
   }
   document.getElementById("table-container").innerHTML = "";
-  createTable(objectsForTable);
+  console.log(tableData);
+  console.log(objectsForTable);
+  createTable(tableData);
 }
 function sortTable(keyToSort, previous) {
   console.log("prevous = " + previous + " and now = " + keyToSort);

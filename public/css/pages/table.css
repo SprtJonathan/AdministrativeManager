@@ -76,6 +76,13 @@ th {
   padding: 8px;
 }
 
+.tr-nodata {
+  width: 100%;
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
 .td-delete {
   border: 1px solid #dddddd;
   text-align: left;
@@ -89,6 +96,12 @@ th {
 
 tr {
   background: rgba(255, 255, 255, 0.2);
+}
+
+.no-data {
+  width: 100%;
+  text-align: left;
+  padding: 8px;
 }
 
 .form-group-export {

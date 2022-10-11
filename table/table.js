@@ -34,7 +34,10 @@ function initPage() {
       tables.forEach((table) => {
         // Create menu buttons for each table
         const tableButtonContainer = document.createElement("div");
-        tableButtonContainer.setAttribute("class", "navbar-table-link-block");
+        tableButtonContainer.setAttribute(
+          "class",
+          "navbar-table-link-block"
+        );
 
         const tableButtonLink = document.createElement("a");
         tableButtonLink.setAttribute("class", "navbar-table-link");
@@ -87,11 +90,13 @@ function initPage() {
           console.log(tableToDelete);
         });
 
-        document.getElementById("table-list").appendChild(tableButtonContainer);
+        const tableList = document.getElementById("table-list");
+        tableList.appendChild(tableButtonContainer);
       });
     }
   }
 }
+
 // Function that handles the deletion of a table
 function deleteTable(idOfTable) {
   // We look for the table we want to delete in the global tables array
@@ -128,8 +133,6 @@ const tableColumns = initVariables();
 
 let state = 0;
 function createTable(data, sortBy) {
-  sortTable(sortBy);
-
   const table = document.createElement("table");
   table.setAttribute("id", "table");
   const thead = document.createElement("thead");
@@ -148,11 +151,12 @@ function createTable(data, sortBy) {
     // th.appendChild(sortImage);
 
     tr.appendChild(th);
-    tr.addEventListener("click", (e) => {
-      const sortBy = e.target.innerText;
-      document.getElementById("table-container").innerHTML = "";
-      createTable(objectsForTable, sortBy);
-    });
+
+    // Trigger for the sort function, shelved for the moment
+    // tr.addEventListener("click", (e) => {
+    //   const sortBy = e.target.innerText;
+    //   createTable(objectsForTable, sortBy);
+    // });
   }
   thead.appendChild(tr);
   table.appendChild(thead);
@@ -201,9 +205,9 @@ function createTable(data, sortBy) {
     }
   } else {
     const tr = document.createElement("tr");
-    tr.setAttribute('class', "tr-nodata");
+    tr.setAttribute("class", "tr-nodata");
     const noDataDiv = document.createElement("div");
-    noDataDiv.setAttribute('class', "no-data");
+    noDataDiv.setAttribute("class", "no-data");
     tr.appendChild(noDataDiv);
     noDataDiv.innerText = "Aucune donnée trouvée";
     tbody.appendChild(tr);
@@ -263,32 +267,6 @@ function searchEntries() {
   console.log(tableData);
   console.log(objectsForTable);
   createTable(tableData);
-}
-function sortTable(keyToSort, previous) {
-  console.log("prevous = " + previous + " and now = " + keyToSort);
-  if (state == 0) {
-    state = 1;
-    return objectsForTable.sort((a, b) => {
-      if (a[keyToSort] < b[keyToSort]) {
-        return -1;
-      }
-      if (a[keyToSort] > b[keyToSort]) {
-        return 1;
-      }
-      return 0;
-    });
-  } else {
-    state = 0;
-    return objectsForTable.sort((a, b) => {
-      if (a[keyToSort] < b[keyToSort]) {
-        return 1;
-      }
-      if (a[keyToSort] > b[keyToSort]) {
-        return -1;
-      }
-      return 0;
-    });
-  }
 }
 
 function tableToCSV(e) {

@@ -25,14 +25,14 @@
           ></a>
           <a
             class="navbar-general-link"
-            href="./"
+            href="../polls/index.html"
             title="Formulaires / Sondages"
             ><i class="fa fa-list"></i
           ></a>
         </div>
         <hr class="navbar-general-spacer" />
         <div id="table-list" class="navbar-table">
-          <div class="navbar-table-link-block">
+          <div class="navbar-table-link-block-new">
             <a
               class="navbar-table-link active"
               href="./index.html"
@@ -45,8 +45,14 @@
     </header>
     <main class="page-content">
       <section id="table-section" class="new-form-header">
-        <div class="intro-text">
+        <div class="homepage-logo">
+          <img
+            src="../public/assets/img/website-logo.svg"
+            alt="Manastrative logo"
+          />
           <h1>Mes tableaux</h1>
+        </div>
+        <div class="intro-text">
           <p>
             Bienvenue dans la section vous permettant de créer et gérer vos
             tableaux.
@@ -108,7 +114,7 @@
 
             <div class="form-group">
               <label for="isRequired">Doit être rempli</label>
-              <input type="checkbox" id="isRequired" />
+              <input type="checkbox" id="isRequired" checked />
             </div>
             <button type="submit" class="new-input-submit">
               Nouveau champ
@@ -128,5 +134,6 @@
       </section>
     </main>
   </body>
+  <script src="../js/confirmation-modal.js"></script>
   <script src="./index.js"></script>
 </html>

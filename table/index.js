@@ -81,7 +81,19 @@ function initPage() {
 
         closeButtonSpan.addEventListener("click", (e) => {
           const tableToDelete = e.target.id.split("-")[1];
-          deleteTable(tableToDelete);
+
+          confirmationModal(
+            "delete-table",
+            "Êtes-vous sûr de vouloir supprimer le tableau <mark>" +
+              table.tableName +
+              "</mark>?",
+            "Oui, supprimer",
+            (e) => {
+              console.log("oui");
+              deleteTable(tableToDelete);
+            }
+          );
+
           console.log(tableToDelete);
         });
 
@@ -90,6 +102,18 @@ function initPage() {
       return selectElement;
     }
   }
+}
+// Function that handles the deletion of a table
+function deleteTable(idOfTable) {
+  // We look for the table we want to delete in the global tables array
+  const tableToDelete = tables.find((table) => table.tableId === idOfTable);
+  // console.log(tableToDelete);
+  console.log(tables.indexOf(tableToDelete));
+  // Now we register the table's index
+  const tableIndex = tables.indexOf(tableToDelete);
+  tables.splice(tableIndex, 1);
+  localStorage.setItem("tables", JSON.stringify(tables));
+  location.reload();
 }
 
 // Asign the localstorage variable to the select value if none is set
@@ -131,19 +155,6 @@ function createNewTable() {
   }
 
   localStorage.setItem("tables", JSON.stringify(tables));
-}
-
-// Function that handles the deletion of a table
-function deleteTable(idOfTable) {
-  // We look for the table we want to delete in the global tables array
-  const tableToDelete = tables.find((table) => table.tableId === idOfTable);
-  // console.log(tableToDelete);
-  console.log(tables.indexOf(tableToDelete));
-  // Now we register the table's index
-  const tableIndex = tables.indexOf(tableToDelete);
-  tables.splice(tableIndex, 1);
-  localStorage.setItem("tables", JSON.stringify(tables));
-  location.reload();
 }
 
 // Function that allows to create a new input in the main form
@@ -275,19 +286,22 @@ function submitMainForm() {
       document.getElementById(selectedTable.tableInputs[i].name).value
     );
   }
-  let newObject = {};
-  everyKeys.forEach((key, i) => (newObject[key] = everyValues[i]));
+  let newObject = { lineId: "line-" + Date.now(), lineObjects: {} };
+  everyKeys.forEach((key, i) => (newObject.lineObjects[key] = everyValues[i]));
   console.log(newObject);
 
-  if (JSON.parse(localStorage.getItem("data")) === null) {
+  if (selectedTable.tableData === null) {
     let newArray = [];
     newArray.push(newObject);
-    localStorage.setItem("data", JSON.stringify(newArray));
+
+    selectedTable.tableData = newArray;
+    localStorage.setItem("tables", JSON.stringify(tables));
   } else {
-    let newArray = JSON.parse(localStorage.getItem("data")).concat([newObject]);
+    let newArray = selectedTable.tableData.concat([newObject]);
     console.log(newArray);
 
-    localStorage.setItem("data", JSON.stringify(newArray));
+    selectedTable.tableData = newArray;
+    localStorage.setItem("tables", JSON.stringify(tables));
   }
 }
 

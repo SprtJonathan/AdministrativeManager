@@ -25,39 +25,71 @@
           ></a>
           <a
             class="navbar-general-link"
-            href="./"
+            href="../polls/index.html"
             title="Formulaires / Sondages"
             ><i class="fa fa-list"></i
           ></a>
         </div>
         <hr class="navbar-general-spacer" />
-        <div class="navbar-general">
-          <div>
+        <div id="table-list" class="navbar-table">
+          <div class="navbar-table-link-block">
             <a
-              class="navbar-general-link active"
-              href="../index.html"
-              title="Accueil"
-              ><i class="fa fa-square-plus"></i>
+              class="navbar-table-link active"
+              href="./index.html"
+              title="Ajouter un tableau"
+              ><i class="fa fa-square-plus active"></i>
             </a>
           </div>
         </div>
       </nav>
     </header>
     <main class="page-content">
-      <div class="searchbar-table-container">
-        <div class="searchbar-container">
-          <label for="searchbar" class="searchbar-label">Rechercher</label>
-          <input
-            id="searchbar"
-            class="searchbar"
-            name="searchbar"
-            type="text"
-            onkeyup="searchEntries()"
-          />
+      <section id="table-intro" class="table-header-section"></section>
+      <section id="table-section" class="table-section">
+        <div class="searchbar-table-container">
+          <div class="searchbar-container">
+            <label for="searchbar" class="searchbar-label">Rechercher</label>
+            <input
+              id="searchbar"
+              class="searchbar"
+              name="searchbar"
+              type="text"
+              onkeyup="searchEntries()"
+            />
+          </div>
         </div>
         <div id="table-container" class="table-container"></div>
-      </div>
+      </section>
+      <section id="table-export" class="table-export-section">
+        <div class="">
+          <h2>Exporter les données</h2>
+          <form class="export-table">
+            <label for="filename">Nom du fichier à exporter</label>
+            <div class="form-group-export">
+              <input
+                id="filename-input"
+                type="text"
+                name="filename"
+                class="input-export"
+              />
+              <button onclick="tableToCSV( event )" class="input-export">
+                Exporter les données
+              </button>
+            </div>
+          </form>
+        </div>
+        <div id="mainFormBlock" class="form-block">
+          <h2>Ajout d'une nouvelle entrée</h2>
+          <form id="mainForm" class="form" onsubmit="submitMainForm( event )">
+            <div id="newObjectForm"></div>
+            <button type="submit" id="mainFormButton" class="new-input-submit">
+              Nouvelle entrée
+            </button>
+          </form>
+        </div>
+      </section>
     </main>
   </body>
+  <script src="../js/confirmation-modal.js"></script>
   <script src="./table.js"></script>
 </html>

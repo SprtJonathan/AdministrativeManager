@@ -16,7 +16,7 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.homepage-header h1 {
+.homepage-header h2 {
   color: whitesmoke;
   width: 95%;
 }
@@ -26,7 +26,6 @@
 .homepage-header p {
   color: whitesmoke;
   width: 95%;
-  margin: 0 auto 1em;
   font-size: 20px;
 }
 
@@ -50,6 +49,11 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.greet-user {
+  width: 95%;
+  margin: 1rem auto;
+}
+
 .table-report {
   width: 95%;
   margin: 1rem auto;
@@ -66,57 +70,18 @@
   color: #f8b500;
 }
 
-.searchbar-table-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: left;
+.polls-report {
   width: 95%;
+  margin: 1rem auto;
 }
-
-.searchbar-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: left;
-  max-width: 100%;
+.polls-report h2 {
+  color: whitesmoke;
+  font-size: 20px;
 }
-
-.searchbar-label {
-  margin-left: 1rem;
+.polls-report p {
+  color: whitesmoke;
+  font-size: 17px;
 }
-
-.searchbar {
-  width: 100%;
-  margin: 0.5rem 0;
-}
-
-.table-container {
-  overflow: scroll;
-  width: 100%;
-}
-
-.table-column {
-  cursor: pointer;
-}
-
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td,
-th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-th {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-tr {
-  background: rgba(255, 255, 255, 0.2);
+.polls-report mark {
+  color: #f8b500;
 }

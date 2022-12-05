@@ -1,0 +1,40 @@
+.confirmation-modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100vw - 80px);
+  height: 100%;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+.confirmation-modal-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  max-height: 300px;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+.confirmation-message {
+  width: 90%;
+  margin: 1rem auto;
+}
+.confirmation-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 90%;
+  margin: 1rem auto;
+}
+.confirmation-button-success {
+  margin-right: 1rem;
+}
+.confirmation-button-abort {
+  background-color: rgb(255, 79, 79);
+}

@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Administrative Manager Tool</title>
     <meta name="description" content="" />
-    <link rel="stylesheet" href="./public/css/main.css" />
+    <link rel="stylesheet" href="../public/css/main.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -16,19 +16,19 @@
         <div class="navbar-general">
           <a
             class="navbar-general-link active"
-            href="./index.html"
+            href="../index.html"
             title="Accueil"
             ><i class="fa fa-house"></i>
           </a>
           <a
             class="navbar-general-link"
-            href="./table/index.html"
+            href="../table/index.html"
             title="Gestionnaire de tableaux"
             ><i class="fa fa-table"></i
           ></a>
           <a
             class="navbar-general-link"
-            href="./polls/index.html"
+            href="./index.html"
             title="Formulaires / Sondages"
             ><i class="fa fa-list"></i
           ></a>
@@ -39,37 +39,18 @@
     <main class="page-content">
       <div class="homepage-logo">
         <img
-          src="./public/assets/img/website-logo.svg"
+          src="../public/assets/img/website-logo.svg"
           alt="Manastrative logo"
         />
-        <h1>Administrative Manager Tool</h1>
+        <h1>Formulaires / Sondages</h1>
       </div>
-      <section class="homepage-header">
-        <div class="greet-user">
-          <h2>Bonjour <mark id="username"></mark>,</h2>
-          <p>Bienvenue sur votre outil de gestion en ligne.</p>
-        </div>
-      </section>
-      <section class="homepage-status-report">
-        <div id="table-report" class="table-report">
-          <h2>Vos tableaux</h2>
-          <p>
-            Actuellement, vous avez <mark id="table-number"></mark> tableaux
-            existants
-          </p>
-        </div>
-      </section>
       <section class="homepage-status-report">
         <div id="polls-report" class="polls-report">
-          <h2>Vos formulaires / sondages</h2>
-          <p>
-            Actuellement, vous avez <mark id="polls-number"></mark> sondages
-            existants
-          </p>
+          <h2>Vos éléments créés</h2>
+          
         </div>
       </section>
     </main>
   </body>
-  <script src="./js/auth-modal.js"></script>
   <script src="./index.js"></script>
 </html>

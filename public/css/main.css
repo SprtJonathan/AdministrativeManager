@@ -1,6 +1,7 @@
 @import "./tools/fonts.css";
 @import "./tools/animations.css";
 @import "./base/common.css";
+@import "./components/auth-modal.css";
 @import "./components/confirmation-modal.css";
 @import "./pages/index.css";
 @import "./pages/new-object-form.css";

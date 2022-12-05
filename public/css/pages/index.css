@@ -16,7 +16,7 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.homepage-header h1 {
+.homepage-header h2 {
   color: whitesmoke;
   width: 95%;
 }
@@ -26,7 +26,6 @@
 .homepage-header p {
   color: whitesmoke;
   width: 95%;
-  margin: 0 auto 1em;
   font-size: 20px;
 }
 
@@ -50,6 +49,11 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.greet-user {
+  width: 95%;
+  margin: 1rem auto;
+}
+
 .table-report {
   width: 95%;
   margin: 1rem auto;
@@ -63,5 +67,21 @@
   font-size: 17px;
 }
 .table-report mark {
+  color: #f8b500;
+}
+
+.polls-report {
+  width: 95%;
+  margin: 1rem auto;
+}
+.polls-report h2 {
+  color: whitesmoke;
+  font-size: 20px;
+}
+.polls-report p {
+  color: whitesmoke;
+  font-size: 17px;
+}
+.polls-report mark {
   color: #f8b500;
 }

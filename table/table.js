@@ -281,7 +281,7 @@ function tableToCSV(e) {
   let rows = document.getElementsByTagName("tr");
   for (let i = 0; i < rows.length; i++) {
     // Get each column data
-    let cols = rows[i].querySelectorAll("td,th");
+    let cols = rows[i].querySelectorAll("td:not(.td-delete),th");
 
     // Stores each csv row data
     let csvrow = [];
